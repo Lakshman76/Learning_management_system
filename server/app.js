@@ -1,8 +1,11 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const dbConnect = require('./config/dbConnection');
 
 const app = express();
+
+dbConnect();
 
 app.use(express.json());
 
