@@ -1,5 +1,5 @@
-const User = require('../models/user.model');
-const { default: AppError } = require('../utils/appError');
+import User from '../models/user.model.js';
+import AppError from '../utils/appError.js';
 
 const cookieoptions = {
     secure: true,
@@ -47,7 +47,7 @@ const register = async (req, res)=>{
     })
 }
 
-const login = async ()=>{
+const login = async (req, res)=>{
     const {email, password} = req.body;
 
     if(!email || !password){
@@ -61,7 +61,7 @@ const login = async ()=>{
         return next(new AppError('Email or password doesnot match', 400));
     }
 
-    const token = await user.generateJWTToken;
+    const token = await user.generateJWTToken();
 
     user.password = undefined;
 
@@ -89,20 +89,20 @@ const logout = (req, res)=>{
 const getProfile = async (req, res)=>{
     try {
         const user = await User.findById(req.user.id);
-        req.status(200).json({
+        res.status(200).json({
             success: true,
             message: 'User Details',
             user
         })
     } catch (err) {
-        req.status(400).json({
+        res.status(400).json({
             success: false,
             message: err.message
         })
     }
 }
 
-module.exports = {
+export {
     register,
     login,
     logout,
