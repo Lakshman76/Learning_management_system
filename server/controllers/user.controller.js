@@ -86,8 +86,20 @@ const logout = (req, res)=>{
         message: "User logged out successfully"
     })
 }
-const getProfile = async ()=>{
-
+const getProfile = async (req, res)=>{
+    try {
+        const user = await User.findById(req.user.id);
+        req.status(200).json({
+            success: true,
+            message: 'User Details',
+            user
+        })
+    } catch (err) {
+        req.status(400).json({
+            success: false,
+            message: err.message
+        })
+    }
 }
 
 module.exports = {
