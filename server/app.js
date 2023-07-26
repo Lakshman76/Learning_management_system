@@ -1,13 +1,13 @@
-require('dotenv').config();
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const dbConnect = require('./config/dbConnection');
-const userRoutes = require('./routes/user.route');
-const errorMiddleware = require('./middlewares/error.middleware');
+import {config}  from 'dotenv';
+import express from'express';
+import cookieParser from'cookie-parser';
+import cors from'cors';
+import dbConnect from'./config/dbConnection.js';
+import userRoutes from'./routes/user.route.js';
+import errorMiddleware from'./middlewares/error.middleware.js';
 
 const app = express();
-
+config();
 dbConnect();
 
 app.use(express.json());
@@ -28,4 +28,4 @@ app.all('*', (req, res)=>{
 
 app.use(errorMiddleware);
 
-module.exports = app;
+export default app;
