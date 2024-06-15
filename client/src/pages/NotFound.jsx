@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center bg-[#1A2238]">
         <h1 className="text-9xl font-extrabold text-white">404</h1>
-        <div className="bg-black text-white absolute px-2 text-sm rounded rotate-12">
+        <div className="bg-black text-white absolute mb-12 px-2 text-sm rounded rotate-12">
             Page not found
         </div>
         <button className="mt-5">
