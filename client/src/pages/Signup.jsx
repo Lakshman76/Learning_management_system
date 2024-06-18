@@ -1,24 +1,29 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { BsPersonCircle } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { isValidEmail, isValidPassword } from "../helpers/regexMatcher";
 import HomeLayout from "../layouts/HomeLayout";
+import { createAccount } from "../redux/slices/authSlice";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [signupDetails, setSignupDetails] = useState({
     fullname: "",
     email: "",
     password: "",
     avatar: "",
   });
+
   const [previewImage, setPreviewImage] = useState("");
 
-  function onFormSubmit(e) {
-    console.log(signupDetails);
+  async function onFormSubmit(e) {
     e.preventDefault();
+    // console.log(signupDetails);
     if (
       !signupDetails.fullname ||
       !signupDetails.email ||
@@ -42,6 +47,25 @@ const Signup = () => {
       );
       return;
     }
+
+    const formData = new FormData();
+    formData.append("fullname", signupDetails.fullname);
+    formData.append("email", signupDetails.email);
+    formData.append("password", signupDetails.password);
+    formData.append("avatar", signupDetails.avatar);
+
+    const response = await dispatch(createAccount(formData));
+    console.log(response);
+    if (response?.payload?.data) {
+      navigate("/");
+    }
+    setSignupDetails({
+      fullname: "",
+      email: "",
+      password: "",
+      avatar: "",
+    });
+    setPreviewImage("");
   }
 
   function handleUserInput(e) {
@@ -52,20 +76,20 @@ const Signup = () => {
       [name]: value,
     });
   }
-  function handleImage(e){
+  function handleImage(e) {
     e.preventDefault();
     const uploadedImage = e.target.files[0];
-    if(!uploadedImage) return;
+    if (!uploadedImage) return;
 
     setSignupDetails({
-        ...signupDetails,
-        avatar: uploadedImage
-    })
+      ...signupDetails,
+      avatar: uploadedImage,
+    });
     const fileReader = new FileReader();
     fileReader.readAsDataURL(uploadedImage);
-    fileReader.addEventListener("load", function() {
-        setPreviewImage(this.result);
-    })
+    fileReader.addEventListener("load", function () {
+      setPreviewImage(this.result);
+    });
   }
 
   return (
@@ -88,7 +112,7 @@ const Signup = () => {
             )}
           </label>
           <input
-          onChange={handleImage}
+            onChange={handleImage}
             className="hidden"
             type="file"
             name="image_uploads"
