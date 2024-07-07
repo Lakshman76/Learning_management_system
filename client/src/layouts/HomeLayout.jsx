@@ -26,7 +26,7 @@ const HomeLayout = ({ children }) => {
 
   async function onLogout(e) {
     e.preventDefault();
-    const response = await dispatch(logout);
+    const response = await dispatch(logout());
     console.log(response);
     if (response?.payload?.data) {
       navigate("/");
