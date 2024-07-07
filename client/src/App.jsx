@@ -2,6 +2,7 @@ import {Route,Routes} from "react-router-dom";
 
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
+import Denied from "./pages/Denied";
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound";
 import Signin from "./pages/Signin";
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/denied" element={<Denied />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
