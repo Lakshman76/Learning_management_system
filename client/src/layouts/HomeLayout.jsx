@@ -1,9 +1,10 @@
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import Footer from "../components/Footer";
+import { logout } from "../redux/slices/authSlice";
 
 const HomeLayout = ({ children }) => {
   function changeWidth() {
@@ -23,10 +24,13 @@ const HomeLayout = ({ children }) => {
   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
   const role = useSelector((state) => state?.auth?.role);
 
-  function onLogout(e) {
+  async function onLogout(e) {
     e.preventDefault();
-    // TODO:
-    navigate("/");
+    const response = await dispatch(logout);
+    console.log(response);
+    if (response?.payload?.data) {
+      navigate("/");
+    }
   }
   return (
     <div className="min-h-[90vh]">
@@ -66,7 +70,7 @@ const HomeLayout = ({ children }) => {
             <li>
               <Link to={"/courses"}>All Courses</Link>
             </li>
-            { !isLoggedIn ? (
+            {!isLoggedIn ? (
               <li className="absolute bottom-4 w-[90%]">
                 <div className="w-full flex items-center justify-center">
                   <button className="btn btn-primary px-4 py-1 font-semibold rounded-md w-1/2">
@@ -76,20 +80,18 @@ const HomeLayout = ({ children }) => {
                     <Link to="/signup">Signup</Link>
                   </button>
                 </div>
-
               </li>
             ) : (
               <li className="absolute bottom-4 w-[90%]">
-              <div className="w-full flex items-center justify-center">
-                <button className="btn btn-primary px-4 py-1 font-semibold rounded-md w-1/2">
-                  <Link to="/user/profile">Profile</Link>
-                </button>
-                <button className="btn btn-secondary px-4 py-1 font-semibold rounded-md w-1/2">
-                  <Link onClick={onLogout}>Signup</Link>
-                </button>
-              </div>
-
-            </li>
+                <div className="w-full flex items-center justify-center">
+                  <button className="btn btn-primary px-4 py-1 font-semibold rounded-md w-1/2">
+                    <Link to="/user/profile">Profile</Link>
+                  </button>
+                  <button className="btn btn-secondary px-4 py-1 font-semibold rounded-md w-1/2">
+                    <Link onClick={onLogout}>Logout</Link>
+                  </button>
+                </div>
+              </li>
             )}
           </ul>
         </div>
