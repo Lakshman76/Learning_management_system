@@ -4,32 +4,39 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../config/axiosInstance";
 
 const initialState = {
-    courseList: []
+  courseList: [],
 };
 
-export const getAllCourses = createAsyncThunk("/auth/getAllCourses", async (data) => {
-  try {
-    const response = axiosInstance.get("/courses", data);
-    toast.promise(response, {
-      loading: "Wait! fetching all courses",
-      success: (data) => {
-        return data?.data?.message;
-      },
-      error: "Failed to load courses",
-    });
-    return await response;
-  } catch (error) {
-    console.log(error);
-    toast.error(error?.response?.data?.message);
+export const getAllCourses = createAsyncThunk(
+  "/auth/getAllCourses",
+  async (data) => {
+    try {
+      const response = axiosInstance.get("/courses", data);
+      toast.promise(response, {
+        loading: "Wait! fetching all courses",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to load courses",
+      });
+      return (await response).data.courses;
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message);
+    }
   }
-});
+);
 
 const courseSlice = createSlice({
   name: "course",
   initialState,
   reducers: {},
-  extraReducers: () => {
-    
+  extraReducers: (builder) => {
+    builder.addCase(getAllCourses.fulfilled, (state, action) => {
+      if (action?.payload) {
+        state.courseList = [...action.payload];
+      }
+    });
   },
 });
 export default courseSlice.reducer;
