@@ -7,13 +7,17 @@ import userRoutes from'./routes/user.route.js';
 import errorMiddleware from'./middlewares/error.middleware.js';
 import morgan from 'morgan';
 
-const app = express();
 config();
 dbConnect();
 
+const app = express();
+
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+    origin: [process.env.FRONTEND_URL],
+    credentials: true
+}));
 
 app.use(cookieParser());
 
