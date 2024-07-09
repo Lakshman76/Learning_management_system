@@ -7,8 +7,10 @@ const cookieoptions = {
     httpOnly: true
 }
 
-const register = async (req, res)=>{
+const register = async (req, res, next)=>{
     const { fullName, email, password } = req.body;
+
+    console.log("hello",req.body);
 
     if(!fullName || !email || !password){
         return next(new AppError('All fields are required', 400));
@@ -47,7 +49,7 @@ const register = async (req, res)=>{
     })
 }
 
-const login = async (req, res)=>{
+const login = async (req, res, next)=>{
     const {email, password} = req.body;
 
     if(!email || !password){
