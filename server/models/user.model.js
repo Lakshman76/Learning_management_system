@@ -9,7 +9,6 @@ const userSchema = new Schema({
         minLength:[5, "Name must be atleast 5 character"],
         maxLength:[30, "Name must be less than 30 character"],
         trim:true
-
     },
     email:{
         type:String,
@@ -17,7 +16,7 @@ const userSchema = new Schema({
         lowercase:true,
         unique:true,
         match: [
-            /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/,
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             'Invalid email address'
           ]
     },
