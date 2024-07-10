@@ -1,4 +1,3 @@
-import {config}  from 'dotenv';
 import express from'express';
 import cookieParser from'cookie-parser';
 import cors from'cors';
@@ -7,7 +6,6 @@ import userRoutes from'./routes/user.route.js';
 import errorMiddleware from'./middlewares/error.middleware.js';
 import morgan from 'morgan';
 
-config();
 dbConnect();
 
 const app = express();
