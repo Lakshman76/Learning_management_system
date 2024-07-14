@@ -242,6 +242,46 @@ const changePassword = async (req, res, next) => {
   }
 };
 
+const updateUser = async (req, res, next) => {
+  const { fullName } = req.body;
+  const { id } = req.user;
+
+  const user = await User.findById(id);
+
+  if (!user) {
+    return next(new AppError("User doesn't exit", 400));
+  }
+
+  if (fullName) {
+    user.fullName = fullName;
+  }
+
+  if (req.file) {
+    await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+
+    const result = await cloudinary.v2.uploader.upload(req.file.path, {
+      folder: "LEARNING_MANAGEMENT_SYSTEM",
+      width: 250,
+      height: 250,
+      gravity: "faces",
+      crop: "fill",
+    });
+    if (result) {
+      user.avatar.public_id = result.public_id;
+      user.avatar.secure_url = result.secure_url;
+
+      fs.rm(`uploads/${req.file.filename}`);
+    }
+  }
+
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    message: "User details updated successfully"
+  })
+};
+
 export {
   register,
   login,
@@ -250,4 +290,5 @@ export {
   forgotPassword,
   resetPassword,
   changePassword,
+  updateUser,
 };
