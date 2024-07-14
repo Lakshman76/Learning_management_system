@@ -97,8 +97,9 @@ const login = async (req, res, next) => {
 
   res.status(201).json({
     success: true,
-    message: "User Regisered Successfully",
+    message: "User logged in",
     user,
+    token
   });
 };
 
@@ -206,4 +207,47 @@ const resetPassword = async (req, res, next) => {
   }
 };
 
-export { register, login, logout, getProfile, forgotPassword, resetPassword };
+const changePassword = async (req, res, next) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    const { id } = req.user;
+
+    if (!oldPassword || !newPassword) {
+      return next(new AppError("All fields are required", 400));
+    }
+
+    const user = await User.findById(id).select("+password");
+
+    if (!user) {
+      return next(new AppError("User not found!", 400));
+    }
+
+    const isPasswordValid = await user.comparePassword(oldPassword);
+
+    if (!isPasswordValid) {
+      return next(new AppError("Password doesn't match!", 400));
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    user.password = undefined;
+
+    res.status(200).json({
+      success: true,
+      message: "Password changed successfully",
+    });
+  } catch (err) {
+    return next(new AppError("Failed to change password!", 400));
+  }
+};
+
+export {
+  register,
+  login,
+  logout,
+  getProfile,
+  forgotPassword,
+  resetPassword,
+  changePassword,
+};
