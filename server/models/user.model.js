@@ -71,7 +71,7 @@ userSchema.methods = {
       { expiresIn: process.env.JWT_EXPIRY }
     );
   },
-  generateForgotToken: async function () {
+  generateForgotPasswordToken: async function () {
     const resetToken = crypto.randomBytes(20).toString("hex");
 
     this.forgotPasswordToken = crypto
