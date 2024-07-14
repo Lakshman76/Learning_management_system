@@ -18,7 +18,13 @@ const isLoggedIn = function (req, res, next) {
 
     next();
   } catch (err) {
-    return next(new AppError("UnAuthenticated, please login!", 401));
+    if (err.name === 'TokenExpiredError') {
+      return next(new AppError("Token expired, please login again!", 401));
+    } else if (err.name === 'JsonWebTokenError') {
+      return next(new AppError("Invalid token, please login again!", 401));
+    } else {
+      return next(new AppError(err.message, 401));
+    }
   }
 };
 
