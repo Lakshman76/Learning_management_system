@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dbConnect from "./config/dbConnection.js";
 import userRoutes from "./routes/user.route.js";
+import courseRoutes from "./routes/course.route.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 import morgan from "morgan";
 
@@ -30,6 +31,7 @@ app.use("/ping", (req, res) => {
 });
 
 app.use("/api/v1/user", userRoutes);
+app.use("api/v1/courses", courseRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).send("OOPS!! 404 page not found");
