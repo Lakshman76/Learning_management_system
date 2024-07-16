@@ -3,6 +3,7 @@ import {
   createCourse,
   getAllCourses,
   getLecturesByCourseId,
+  updateCourse,
 } from "../controllers/course.controller.js";
 import { isLoggedIn } from "../middlewares/auth.middleware.js";
 import upload from "../middlewares/multer.middleware.js";
@@ -14,6 +15,7 @@ router
   .post(upload.single("thumbnail"), createCourse);
 router
   .route("/:courseId")
-  .get(isLoggedIn, getLecturesByCourseId);
+  .get(isLoggedIn, getLecturesByCourseId)
+  .put(updateCourse)
 
 export default router;

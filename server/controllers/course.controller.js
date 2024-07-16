@@ -80,6 +80,30 @@ export const createCourse = async (req, res, next) => {
   }
 };
 
-export const updateCourse = async (req, res, next) => {};
+export const updateCourse = async (req, res, next) => {
+  try {
+    const { courseId } = req.params;
 
-export const deleteCourse = async (req, res, next) => {};
+    const course = await Course.findByIdAndUpdate(
+      courseId,
+      {
+        $set: req.body,
+      },
+      {
+        runValidators: true,
+      }
+    );
+
+    if (!course) {
+      return next(new AppError("Invalid course Id!", 400));
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Course updated successfully",
+      course,
+    });
+  } catch (err) {
+    return next(new AppError(err.message, 500));
+  }
+};
