@@ -107,3 +107,24 @@ export const updateCourse = async (req, res, next) => {
     return next(new AppError(err.message, 500));
   }
 };
+
+export const deleteCourse = async (req, res, next) => {
+  try {
+    const { courseId } = req.params;
+
+    const course = await Course.findById(courseId);
+
+    if (!course) {
+      return next(new AppError("Courese does not find by given id!"));
+    }
+
+    await Course.findByIdAndDelete(courseId);
+
+    res.status(200).json({
+      success: true,
+      message: "Course deleted successfully",
+    });
+  } catch (err) {
+    return next(new AppError(err.message, 500));
+  }
+};
