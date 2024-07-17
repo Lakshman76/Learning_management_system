@@ -181,3 +181,34 @@ export const addLecturesToCourseById = async (req, res, next) => {
     return next(new AppError(err.message, 500));
   }
 };
+
+export const deleteLecturesByIndex = async (req, res, next) => {
+  try {
+    const { index } = req.body;
+    const { courseId } = req.params;
+
+    if (!index) {
+      return next(new AppError("Please provide index!", 400));
+    }
+
+    const course = await Course.findById(courseId);
+
+    if (!course) {
+      return next(new AppError("Invalid course Id", 400));
+    }
+
+    course.lectures.splice(index, 1);
+
+    course.numberOfLectures = course.lectures.length;
+
+    await course.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Lecture deleted successfully!",
+      course,
+    });
+  } catch (err) {
+    return next(new AppError(err.message, 500));
+  }
+};

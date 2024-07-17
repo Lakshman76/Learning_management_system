@@ -3,6 +3,7 @@ import {
   addLecturesToCourseById,
   createCourse,
   deleteCourse,
+  deleteLecturesByIndex,
   getAllCourses,
   getLecturesByCourseId,
   updateCourse,
@@ -25,6 +26,18 @@ router
   .get(isLoggedIn, getLecturesByCourseId)
   .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourse)
   .delete(isLoggedIn, authorizedRoles("ADMIN"), deleteCourse)
-  .post(isLoggedIn, authorizedRoles("ADMIN"), upload.single("lecture"), addLecturesToCourseById);
+  .post(
+    isLoggedIn,
+    authorizedRoles("ADMIN"),
+    upload.single("lecture"),
+    addLecturesToCourseById
+  );
+
+router.delete(
+  "/lecture/:courseId",
+  isLoggedIn,
+  authorizedRoles("ADMIN"),
+  deleteLecturesByIndex
+);
 
 export default router;
