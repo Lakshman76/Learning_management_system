@@ -18,9 +18,9 @@ const isLoggedIn = function (req, res, next) {
 
     next();
   } catch (err) {
-    if (err.name === 'TokenExpiredError') {
+    if (err.name === "TokenExpiredError") {
       return next(new AppError("Token expired, please login again!", 401));
-    } else if (err.name === 'JsonWebTokenError') {
+    } else if (err.name === "JsonWebTokenError") {
       return next(new AppError("Invalid token, please login again!", 401));
     } else {
       return next(new AppError(err.message, 401));
@@ -28,4 +28,19 @@ const isLoggedIn = function (req, res, next) {
   }
 };
 
-export { isLoggedIn };
+const authorizedRoles =
+  (...roles) =>
+  (req, res, next) => {
+    const currentRole = req.user.role;
+
+    if (!roles.includes(currentRole)) {
+      return next(
+        new AppError("You do not have permission to access this route"),
+        403
+      );
+    }
+
+    next();
+  };
+
+export { isLoggedIn, authorizedRoles };
