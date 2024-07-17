@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  addLecturesToCourseById,
   createCourse,
   deleteCourse,
   getAllCourses,
@@ -23,6 +24,7 @@ router
   .route("/:courseId")
   .get(isLoggedIn, getLecturesByCourseId)
   .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourse)
-  .delete(isLoggedIn, authorizedRoles("ADMIN"), deleteCourse);
+  .delete(isLoggedIn, authorizedRoles("ADMIN"), deleteCourse)
+  .post(isLoggedIn, authorizedRoles("ADMIN"), upload.single("lecture"), addLecturesToCourseById);
 
 export default router;
