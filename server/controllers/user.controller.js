@@ -12,10 +12,14 @@ const cookieoptions = {
 };
 
 const register = async (req, res, next) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, email, password, role } = req.body;
 
   if (!fullName || !email || !password) {
     return next(new AppError("All fields are required", 400));
+  }
+
+  if (role && !["USER", "ADMIN"].includes(role)) {
+    return next(new AppError("Invalid role", 400));
   }
 
   const userExists = await User.findOne({ email });
@@ -27,6 +31,7 @@ const register = async (req, res, next) => {
     fullName,
     email,
     password,
+    role: role || "USER",
     avatar: {
       public_id: email,
       secure_url:
