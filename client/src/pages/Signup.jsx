@@ -13,7 +13,7 @@ const Signup = () => {
   const dispatch = useDispatch();
 
   const [signupDetails, setSignupDetails] = useState({
-    fullname: "",
+    fullName: "",
     email: "",
     password: "",
     avatar: "",
@@ -23,9 +23,8 @@ const Signup = () => {
 
   async function onFormSubmit(e) {
     e.preventDefault();
-    // console.log(signupDetails);
     if (
-      !signupDetails.fullname ||
+      !signupDetails.fullName ||
       !signupDetails.email ||
       !signupDetails.password ||
       !signupDetails.avatar
@@ -33,7 +32,7 @@ const Signup = () => {
       toast.error("Please fill all the Details");
       return;
     }
-    if (signupDetails.fullname.length < 5) {
+    if (signupDetails.fullName.length < 5) {
       toast.error("Name should be atleat of five character");
       return;
     }
@@ -49,18 +48,18 @@ const Signup = () => {
     }
 
     const formData = new FormData();
-    formData.append("fullname", signupDetails.fullname);
+    formData.append("fullName", signupDetails.fullName);
     formData.append("email", signupDetails.email);
     formData.append("password", signupDetails.password);
     formData.append("avatar", signupDetails.avatar);
 
     const response = await dispatch(createAccount(formData));
-    // console.log(response);
+    console.log("Response",response);
     if (response?.payload?.data) {
       navigate("/");
     }
     setSignupDetails({
-      fullname: "",
+      fullName: "",
       email: "",
       password: "",
       avatar: "",
@@ -120,16 +119,16 @@ const Signup = () => {
             accept="*"
           />
           <div className="flex flex-col gap-1">
-            <label htmlFor="fullname" className="font-semibold">
+            <label htmlFor="fullName" className="font-semibold">
               Name
             </label>
             <input
               onChange={handleUserInput}
-              value={signupDetails.fullname}
+              value={signupDetails.fullName}
               type="text"
-              name="fullname"
+              name="fullName"
               placeholder="Enter username"
-              id="fullname"
+              id="fullName"
               className="bg-transparent px-2 py-1 border"
               required
             />
