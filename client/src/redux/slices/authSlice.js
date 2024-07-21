@@ -45,7 +45,7 @@ export const login = createAsyncThunk("/auth/signin", async (data) => {
 
 export const logout = createAsyncThunk("/auth/logout", async () => {
   try {
-    const response = axiosInstance.post("user/logout");
+    const response = axiosInstance.get("user/logout");
     toast.promise(response, {
       loading: "Wait! logging off your account",
       success: (data) => {
@@ -67,7 +67,6 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action);
         localStorage.setItem("data", JSON.stringify(action?.payload?.data));
         localStorage.setItem("isLoggedIn", true);
         localStorage.setItem("role", action?.payload?.data?.user?.role);
