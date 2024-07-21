@@ -1,10 +1,11 @@
-import {Route,Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
+import CourseDescription from "./pages/courses/CourseDescription";
 import CourseList from "./pages/courses/CourseList";
 import Denied from "./pages/Denied";
-import Home from "./pages/Home"
+import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -19,9 +20,10 @@ const App = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/denied" element={<Denied />} />
       <Route path="/courses" element={<CourseList />} />
+      <Route path="/course/description" element={<CourseDescription />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
-  )
-}
+  );
+};
 
-export default App
+export default App;
