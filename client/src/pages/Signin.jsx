@@ -30,7 +30,6 @@ const Signin = () => {
     }
 
     const response = await dispatch(login(signinDetails));
-    console.log("Hello", response);
     if (response?.payload?.data) {
       navigate("/");
     }
