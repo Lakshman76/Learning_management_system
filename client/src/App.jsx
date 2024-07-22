@@ -1,9 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 
+import RequireAuth from "./components/Auth/RequireAuth";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import CourseDescription from "./pages/courses/CourseDescription";
 import CourseList from "./pages/courses/CourseList";
+import CreateCourse from "./pages/courses/CreateCourse";
 import Denied from "./pages/Denied";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -21,6 +23,9 @@ const App = () => {
       <Route path="/denied" element={<Denied />} />
       <Route path="/courses" element={<CourseList />} />
       <Route path="/course/description" element={<CourseDescription />} />
+      <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
+        <Route path="/course/create" element={<CreateCourse />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
