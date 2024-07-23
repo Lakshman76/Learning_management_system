@@ -6,7 +6,7 @@ import axiosInstance from "../../config/axiosInstance";
 const initialState = {
   isLoggedIn: localStorage.getItem("isLoggedIn") || false,
   role: localStorage.getItem("role") || "",
-  data: localStorage.getItem("data") || {},
+  data: JSON.parse(localStorage.getItem("data")) || {},
 };
 
 export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
@@ -21,7 +21,7 @@ export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
     });
     return await response;
   } catch (error) {
-    console.log(error); 
+    console.log(error);
     toast.error(error?.response?.data?.message);
   }
 });
@@ -38,7 +38,7 @@ export const login = createAsyncThunk("/auth/signin", async (data) => {
     });
     return await response;
   } catch (error) {
-    console.log(error); 
+    console.log(error);
     toast.error(error?.response?.data?.message);
   }
 });
