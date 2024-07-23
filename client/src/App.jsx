@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import Profile from "./pages/User/Profile";
 
 const App = () => {
   return (
@@ -25,6 +26,9 @@ const App = () => {
       <Route path="/course/description" element={<CourseDescription />} />
       <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
         <Route path="/course/create" element={<CreateCourse />} />
+      </Route>
+      <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
+        <Route path="/user/profile" element={<Profile />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
