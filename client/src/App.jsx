@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import EditProfile from "./pages/User/EditProfile";
 import Profile from "./pages/User/Profile";
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
       </Route>
       <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
         <Route path="/user/profile" element={<Profile />} />
+        <Route path="/user/edit-profile" element={<EditProfile />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
