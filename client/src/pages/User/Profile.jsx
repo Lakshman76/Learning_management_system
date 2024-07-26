@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
 
 const Profile = () => {
-  const userData = useSelector((state) => state?.auth?.data);
+  const userData = useSelector((state) => state?.auth?.data?.user);
+
   return (
     <HomeLayout>
       <div className="min-h-[90vh] flex justify-center items-center ">
@@ -21,11 +22,7 @@ const Profile = () => {
             <p>Email: </p> <p>{userData?.email}</p>
             <p>Role: </p> <p>{userData?.role}</p>
             <p>Subscription: </p>{" "}
-            <p>
-              {userData?.subscription?.status === "active"
-                ? "Active"
-                : "Inactive"}
-            </p>
+            <p>{userData?.subscription === "active" ? "Active" : "Inactive"}</p>
           </div>
           <div className="flex justify-between items-center gap-2">
             <Link
@@ -41,7 +38,7 @@ const Profile = () => {
               <button>Edit Profile</button>
             </Link>
           </div>
-          {userData?.subscription?.status === "active" && (
+          {userData?.subscription === "active" && (
             <button className="w-full h-12 text-center rounded-sm font-semibold  cursor-pointer bg-red-500 border border-red-500 hover:bg-transparent hover:text-red-500 transition-all ease-in-out duration-300">
               Cancel Subscription
             </button>
