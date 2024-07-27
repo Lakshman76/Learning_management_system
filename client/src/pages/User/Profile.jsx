@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
 
 const Profile = () => {
-  const userData = useSelector((state) => state?.auth?.data?.user);
+  const userData = useSelector((state) => state?.auth?.data);
 
   return (
     <HomeLayout>
