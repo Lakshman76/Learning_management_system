@@ -42,10 +42,6 @@ const EditProfile = () => {
   }
   async function onFormSubmit(e) {
     e.preventDefault();
-    if (!data.fullName || !data.avatar) {
-      toast.error("All fields are required");
-      return;
-    }
     if (data.fullName.length < 5) {
       toast.error("Name cannot be less than five character");
       return;
