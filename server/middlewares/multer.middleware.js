@@ -11,20 +11,20 @@ const upload = multer({
     },
   }),
   fileFilter: (_req, file, cb) => {
-    let ext = path.extname(file.originalname);
-    if (
-      ext !== ".jpg" &&
-      ext !== ".jpeg" &&
-      ext !== ".png" &&
-      ext !== ".webp" &&
-      ext !== ".jpg" &&
-      ext !== ".mp4" &&
-      ext !== ".gif"
-    ) {
-      cb(new Error(`unsuported file type! ${ext}`), false);
-      return;
+    let ext = path.extname(file.originalname).toLowerCase();
+    const allowedExtensions = [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".webp",
+      ".mp4",
+      ".gif",
+    ];
+    if (!allowedExtensions.includes(ext)) {
+      cb(new Error(`Unsupported file type! ${ext}`), false);
+    } else {
+      cb(null, true);
     }
-    cb(null, true);
   },
 });
 

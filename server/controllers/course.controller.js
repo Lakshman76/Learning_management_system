@@ -158,6 +158,7 @@ export const addLecturesToCourseById = async (req, res, next) => {
     if (req.file) {
       const result = await cloudinary.v2.uploader.upload(req.file.path, {
         folder: "LEARNING_MANAGEMENT_SYSTEM",
+        resource_type: "auto", 
       });
       if (result) {
         lectureData.lecture.public_id = result.public_id;
