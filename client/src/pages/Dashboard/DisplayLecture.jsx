@@ -19,8 +19,8 @@ const DisplayLecture = () => {
 
   const [currentVideo, setCurrentVideo] = useState(0);
 
-  async function onLectureDelete(cid, lIdx) {
-    await dispatch(deleteCourseLecture(cid, lIdx));
+  async function onLectureDelete(cid, lid) {
+    await dispatch(deleteCourseLecture({ courseId: cid, lectureId: lid }));
     await dispatch(getCourseLecture(state._id));
   }
 
@@ -58,13 +58,13 @@ const DisplayLecture = () => {
                 {lectures[currentVideo]?.description}
               </p>
             </div>
-            <ul className="space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black]">
-              <li className="text-xl font-semibold text-yellow-500 flex justify-between items-center">
+            <ul className="w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] space-y-5">
+              <li className="font-semibold text-xl text-yellow-500 flex items-center justify-between">
                 Lectures list
                 {role === "ADMIN" && (
                   <button
-                    onClick={() => navigate("/courses/addLecture")}
-                    className="btn-primary px-2 py-1 rounded-md font-semibold text-sm"
+                    onClick={() => navigate("/course/addlecture")}
+                    className="btn btn-primary  rounded-md font-semibold text-sm"
                   >
                     Add new lecture
                   </button>
@@ -72,22 +72,31 @@ const DisplayLecture = () => {
               </li>
               {lectures.map((lecture, idx) => {
                 return (
-                  <li className="space-y-2" key={lecture._id}>
+                  <li className="space-y-2 border " key={lecture._id}>
                     <p
-                      className="cursor-pointer"
+                      className="p-2 cursor-pointer flex justify-between items-center"
                       onClick={() => setCurrentVideo(idx)}
                     >
-                      <span className="font-semibold">Lecture {idx + 1}: </span>
-                      {lecture?.title}
-                    </p>
-                    {role === "ADMIN" && (
-                      <button
-                        onClick={() => onLectureDelete(state._id, idx)}
-                        title="delete"
+                      <span
+                        className={
+                          currentVideo === idx
+                            ? "font-bold text-lg "
+                            : "" + "transition-all ease-in-out duration-300"
+                        }
                       >
-                        <RiDeleteBin6Line />
-                      </button>
-                    )}
+                        Lecture {idx + 1}: {lecture?.title}
+                      </span>
+
+                      {role === "ADMIN" && (
+                        <button
+                          onClick={() => onLectureDelete(state._id, idx)}
+                          title="delete"
+                          className="w-8 h-8 flex justify-center items-center bg-accent text-black rounded-md"
+                        >
+                          <RiDeleteBin6Line />
+                        </button>
+                      )}
+                    </p>
                   </li>
                 );
               })}
