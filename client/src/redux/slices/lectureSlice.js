@@ -26,7 +26,7 @@ export const getCourseLecture = createAsyncThunk(
 
 export const addCourseLecture = createAsyncThunk(
   "/course/lecture/add",
-  (data) => {
+  async (data) => {
     try {
       const formData = new FormData();
       formData.append("lecture", data.lecture);
@@ -39,6 +39,7 @@ export const addCourseLecture = createAsyncThunk(
         success: "Successfully added course lectures",
         error: "Failed to add the lecture!",
       });
+      return (await response)?.data;
     } catch (error) {
       toast.error(error?.data?.response?.message);
     }
@@ -49,9 +50,12 @@ export const deleteCourseLecture = createAsyncThunk(
   "/course/lecture/delete",
   async (data) => {
     try {
-      const response = axiosInstance.delete(`/courses/lecture/${data?.courseId}`, {
-        data: { index: data?.lectureId },
-      });
+      const response = axiosInstance.delete(
+        `/courses/lecture/${data?.courseId}`,
+        {
+          data: { index: data?.lectureId },
+        }
+      );
       toast.promise(response, {
         loading: "Wait! deleting course lectures",
         success: "Successfully deleted course lectures",

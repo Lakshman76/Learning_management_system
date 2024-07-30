@@ -37,18 +37,14 @@ const DisplayLecture = () => {
         {lectures && lectures.length > 0 && (
           <div className="flex justify-center gap-10 w-full">
             <div className="space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] ">
-              {/* <video
+              <video
                 src={lectures[currentVideo]?.lecture?.secure_url}
                 className="object-fill rounded-t-lg w-full"
                 controls
                 disablePictureInPicture
                 controlsList="nodownload"
                 muted
-              ></video> */}
-              <img
-                src={lectures[currentVideo]?.lecture?.secure_url}
-                className="object-fill rounded-t-lg w-full"
-              />
+              ></video>
               <h1>
                 <span className="text-yellow-500">Title: </span>
                 {lectures[currentVideo]?.title}
@@ -63,7 +59,9 @@ const DisplayLecture = () => {
                 Lectures list
                 {role === "ADMIN" && (
                   <button
-                    onClick={() => navigate("/course/addlecture")}
+                    onClick={() =>
+                      navigate("/course/addlecture", { state: { ...state } })
+                    }
                     className="btn btn-primary  rounded-md font-semibold text-sm"
                   >
                     Add new lecture
