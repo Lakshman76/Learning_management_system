@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import CourseDescription from "./pages/courses/CourseDescription";
 import CourseList from "./pages/courses/CourseList";
 import CreateCourse from "./pages/courses/CreateCourse";
+import AddLecture from "./pages/Dashboard/AddLecture";
 import DisplayLecture from "./pages/Dashboard/DisplayLecture";
 import Denied from "./pages/Denied";
 import Home from "./pages/Home";
@@ -29,6 +30,7 @@ const App = () => {
       <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
         <Route path="/course/create" element={<CreateCourse />} />
         <Route path="/courses/displayLectures" element={<DisplayLecture />} />
+        <Route path="/course/addlecture" element={<AddLecture />} />
       </Route>
       <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
         <Route path="/user/profile" element={<Profile />} />
