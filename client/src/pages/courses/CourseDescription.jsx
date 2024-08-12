@@ -11,12 +11,12 @@ const CourseDescription = () => {
   return (
     <HomeLayout>
       <div className="min-h-[90vh] pt-12 px-20 flex flex-col justify-center items-center text-white ">
-        <div className="grid grid-cols-2 gap-10 py-10 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-10 relative">
           <div className="space-y-5">
             <img
               src={state?.thumbnail?.secure_url}
               alt="thumbnail"
-              className="w-full h-64"
+              className="w-full h-64 "
             />
             <div className="space-y-4">
               <div className="flex flex-col justify-between items-center text-xl">
@@ -58,10 +58,14 @@ const CourseDescription = () => {
             <h1 className="text-3xl font-bold text-yellow-500 mb-5 text-center">
               {state?.title}
             </h1>
-            <p className="text-yellow-500 font-semibold">Course description: </p>
+            <p className="text-yellow-500 font-semibold">
+              Course description:{" "}
+            </p>
             <p>{state?.description}</p>
             <p>
-              <span className="text-yellow-500 font-semibold">Instructor: </span>
+              <span className="text-yellow-500 font-semibold">
+                Instructor:{" "}
+              </span>
               {state?.createdBy}
             </p>
           </div>

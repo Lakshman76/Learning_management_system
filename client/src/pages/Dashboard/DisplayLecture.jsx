@@ -35,7 +35,7 @@ const DisplayLecture = () => {
           Course Name: {state?.title}
         </div>
         {lectures && lectures.length > 0 && (
-          <div className="flex justify-center gap-10 w-full">
+          <div className=" flex md:flex-row flex-col md:justify-center gap-10 w-full h-full">
             <div className="space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] ">
               <video
                 src={lectures[currentVideo]?.lecture?.secure_url}
