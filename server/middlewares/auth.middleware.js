@@ -43,4 +43,14 @@ const authorizedRoles =
     next();
   };
 
-export { isLoggedIn, authorizedRoles };
+const authorizedSubscriber = (req, res, next) => {
+  const subscriptionStatus = req.user.subscription.status;
+  const currentRole = req.user.role;
+
+  if (currentRole !== "ADMIN" && subscriptionStatus !== "active") {
+    return next(new AppError("please subscribe to access this route"), 403);
+  }
+  next();
+};
+
+export { isLoggedIn, authorizedRoles, authorizedSubscriber };
