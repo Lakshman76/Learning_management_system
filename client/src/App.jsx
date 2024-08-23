@@ -12,6 +12,7 @@ import Denied from "./pages/Denied";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Payments/Checkout";
+import CheckoutFailure from "./pages/Payments/CheckoutFailure";
 import CheckoutSuccess from "./pages/Payments/CheckoutSuccess";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/user/edit-profile" element={<EditProfile />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
+        <Route path="/checkout/fail" element={<CheckoutFailure />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
