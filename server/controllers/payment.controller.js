@@ -18,7 +18,7 @@ export const getRazorpayApiKey = async (req, res, next) => {
 export const buySubscription = async (req, res, next) => {
   try {
     const { id } = req.user;
-    const user = await User.findByID(id);
+    const user = await User.findById(id);
 
     if (!user) {
       return next(new AppError("Unauthorized, please login", 500));
