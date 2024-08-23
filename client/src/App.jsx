@@ -40,6 +40,7 @@ const App = () => {
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/edit-profile" element={<EditProfile />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout/success" element={<CheckoutSuccess />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
