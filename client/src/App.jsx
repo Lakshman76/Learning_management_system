@@ -11,6 +11,8 @@ import DisplayLecture from "./pages/Dashboard/DisplayLecture";
 import Denied from "./pages/Denied";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import Checkout from "./pages/Payments/Checkout";
+import CheckoutSuccess from "./pages/Payments/CheckoutSuccess";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import EditProfile from "./pages/User/EditProfile";
@@ -27,15 +29,19 @@ const App = () => {
       <Route path="/denied" element={<Denied />} />
       <Route path="/courses" element={<CourseList />} />
       <Route path="/course/description" element={<CourseDescription />} />
+
       <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
         <Route path="/course/create" element={<CreateCourse />} />
         <Route path="/courses/displayLectures" element={<DisplayLecture />} />
         <Route path="/course/addlecture" element={<AddLecture />} />
       </Route>
+
       <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/edit-profile" element={<EditProfile />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Route>
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
