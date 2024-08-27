@@ -16,6 +16,7 @@ import CheckoutFailure from "./pages/Payments/CheckoutFailure";
 import CheckoutSuccess from "./pages/Payments/CheckoutSuccess";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import ChangePassword from "./pages/User/ChangePassword";
 import EditProfile from "./pages/User/EditProfile";
 import Profile from "./pages/User/Profile";
 
@@ -40,6 +41,7 @@ const App = () => {
       <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/edit-profile" element={<EditProfile />} />
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/checkout/fail" element={<CheckoutFailure />} />
