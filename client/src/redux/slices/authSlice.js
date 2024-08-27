@@ -7,8 +7,7 @@ const initialState = {
   isLoggedIn: localStorage.getItem("isLoggedIn") || false,
   role: localStorage.getItem("role") || "",
   data:
-    localStorage.getItem("data") &&
-    localStorage.getItem("data") !== "undefined"
+    localStorage.getItem("data") && localStorage.getItem("data") !== "undefined"
       ? JSON.parse(localStorage.getItem("data"))
       : {},
 };
@@ -95,20 +94,37 @@ export const getUserData = createAsyncThunk("/auth/getData", async () => {
   }
 });
 
-export const changePassword = createAsyncThunk("/auth/changePassword", async (data) => {
+export const changePassword = createAsyncThunk(
+  "/auth/changePassword",
+  async (data) => {
+    try {
+      const response = axiosInstance.post("user/change-password", data);
+
+      toast.promise(response, {
+        success: "Password changed successfully",
+        loading: "Wait! changing password",
+        error: "Failed to change password",
+      });
+      return await response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+export const forgetPassword = createAsyncThunk("auth/reset", async (data) => {
   try {
-    const response = axiosInstance.post("user/change-password", data);
-    
+    const response = axiosInstance.post("/user/reset", data);
     toast.promise(response, {
-      success: "Password changed successfully",
-      loading: "Wait! changing password",
-      error: "Failed to change password",
-    })
-    return (await response);
+      success: "Done! Please check your mail",
+      loading: "Wait! Sending mail",
+      error: "Failed to reset",
+    });
+    return await response;
   } catch (err) {
     console.log(err);
   }
-})
+});
 
 const authSlice = createSlice({
   name: "auth",
