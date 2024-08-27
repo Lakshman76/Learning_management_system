@@ -9,6 +9,7 @@ import CreateCourse from "./pages/courses/CreateCourse";
 import AddLecture from "./pages/Dashboard/AddLecture";
 import DisplayLecture from "./pages/Dashboard/DisplayLecture";
 import Denied from "./pages/Denied";
+import ForgetPassword from "./pages/ForgetPassword";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Payments/Checkout";
@@ -27,6 +28,7 @@ const App = () => {
       <Route path="/about" element={<AboutUs />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Signin />} />
+      <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/denied" element={<Denied />} />
       <Route path="/courses" element={<CourseList />} />
