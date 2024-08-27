@@ -156,7 +156,7 @@ const forgotPassword = async (req, res, next) => {
   const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
   const subject = "reset password";
   const message = `<h1>Reset Password</h1>
-  <p>Dear user,</p>
+  <p>Dear ${user.fullName},</p>
   <p>We've received your request to reset your password. Please click the link below to reset your password:</p>
   <a href="${resetPasswordUrl}">Reset Password</a>
   <p>If you didn't request a password reset, please ignore this email and contact our support team at <b>developerlakshman26@gmail.com</b></p>

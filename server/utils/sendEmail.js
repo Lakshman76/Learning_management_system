@@ -15,7 +15,7 @@ const sendEmail = async function (email, subject, message) {
       name: "Lakshman Kumar",
       address: process.env.EMAIL_USERNAME,
     }, // sender address
-    to: process.env.RECEIVERS_EMAIL, // list of receivers
+    to: email, //or --> to: process.env.RECEIVERS_EMAIL, // list of receivers
     subject: subject, // Subject line
     html: message, // html body
   });
