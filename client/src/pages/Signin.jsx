@@ -50,11 +50,11 @@ const Signin = () => {
 
   return (
     <HomeLayout>
-      <div className="flex overflow-x-auto items-center justify-center h-[100vh]">
+      <div className="flex overflow-x-auto items-center justify-center h-[90vh]">
         <form
           onSubmit={onFormSubmit}
           noValidate
-          className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white"
+          className="w-80 min-h-[26rem] flex flex-col justify-center gap-3 rounded-lg p-4 text-white shadow-[0_0_10px_black]"
         >
           <h1 className="text-2xl text-center font-bold">Login Form</h1>
 
@@ -89,7 +89,10 @@ const Signin = () => {
           <button className="mt-2 py-2 text-lg font-semibold bg-yellow-700 hover:bg-yellow-600 transition-all ease-in-out duration-300 ">
             Login
           </button>
-          <p>
+          <Link to="/forget-password" className="text-accent text-center">
+            Forget Password
+          </Link>
+          <p className="text-center">
             Don&apos;t have an account ?{" "}
             <Link to="/signup" className="text-accent">
               Sign Up
