@@ -112,13 +112,30 @@ export const changePassword = createAsyncThunk(
   }
 );
 
-export const forgetPassword = createAsyncThunk("auth/reset", async (data) => {
+export const forgetPassword = createAsyncThunk(
+  "/auth/forgetPassword",
+  async (data) => {
+    try {
+      const response = axiosInstance.post("user/reset", data);
+      toast.promise(response, {
+        success: "Done! Please check your mail",
+        loading: "Wait! Sending mail",
+        error: "Failed to reset",
+      });
+      return await response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk("/auth/reset", async (data) => {
   try {
-    const response = axiosInstance.post("/user/reset", data);
+    const response = axiosInstance.post(`/user/reset/${data[0]}`, data[1]);
     toast.promise(response, {
-      success: "Done! Please check your mail",
-      loading: "Wait! Sending mail",
-      error: "Failed to reset",
+      success: "Password successfully setted",
+      loading: "Wait! setting password",
+      error: "Failed to set password",
     });
     return await response;
   } catch (err) {
