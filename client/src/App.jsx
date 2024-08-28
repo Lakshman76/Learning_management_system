@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Payments/Checkout";
 import CheckoutFailure from "./pages/Payments/CheckoutFailure";
 import CheckoutSuccess from "./pages/Payments/CheckoutSuccess";
+import ResetPassword from "./pages/ResetPassword";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import ChangePassword from "./pages/User/ChangePassword";
@@ -29,6 +30,7 @@ const App = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
+      <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/denied" element={<Denied />} />
       <Route path="/courses" element={<CourseList />} />
