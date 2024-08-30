@@ -17,6 +17,7 @@ const ResetPassword = () => {
     e.preventDefault();
     if (!password) {
       toast.error("Password required");
+      return;
     }
     const res = await dispatch(resetPassword([ resetToken, {password} ]));
     if(res?.payload?.data?.success){

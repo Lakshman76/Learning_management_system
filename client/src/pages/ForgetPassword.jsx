@@ -14,6 +14,7 @@ const ForgetPassword = () => {
     e.preventDefault();
     if (!email) {
       toast.error("Email is required");
+      return;
     }
     const res = await dispatch(forgetPassword({ email }));
     if (res?.payload?.data?.success) {

@@ -30,11 +30,19 @@ const Profile = () => {
           <h3 className="text-xl font-semibold text-center capitalize">
             {userData?.fullName}
           </h3>
-          <div className="grid grid-cols-2">
-            <p>Email: </p> <p>{userData?.email}</p>
-            <p>Role: </p> <p>{userData?.role}</p>
-            <p>Subscription: </p>{" "}
-            <p>{userData?.subscription === "active" ? "Active" : "Inactive"}</p>
+          <div>
+            <div className="flex justify-between items-center gap-2">
+              <p>Email: </p> <p>{userData?.email}</p>
+            </div>
+            <div className="flex justify-between items-center gap-2">
+              <p>Role: </p> <p>{userData?.role}</p>
+            </div>
+            <div className="flex justify-between items-center gap-2">
+              <p>Subscription: </p>
+              <p>
+                {userData?.subscription === "active" ? "Active" : "Inactive"}
+              </p>
+            </div>
           </div>
           <div className="flex justify-between items-center gap-2">
             <Link
@@ -51,7 +59,10 @@ const Profile = () => {
             </Link>
           </div>
           {userData?.subscription === "active" && (
-            <button onClick={handleCancelSubscription} className="w-full h-12 text-center rounded-sm font-semibold  cursor-pointer bg-red-500 border border-red-500 hover:bg-transparent hover:text-red-500 transition-all ease-in-out duration-300">
+            <button
+              onClick={handleCancelSubscription}
+              className="w-full h-12 text-center rounded-sm font-semibold  cursor-pointer bg-red-500 border border-red-500 hover:bg-transparent hover:text-red-500 transition-all ease-in-out duration-300"
+            >
               Cancel Subscription
             </button>
           )}
