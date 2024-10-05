@@ -9,7 +9,7 @@ const isLoggedIn = function (req, res, next) {
       return next(new AppError("UnAuthenticated, please login!", 401));
     }
 
-    const tokenDetails = jwt.verify(token, process.env.JWT_SECRET);
+    const tokenDetails = jwt.verify(token, process.env.SECRET);
 
     if (!tokenDetails) {
       return next(new AppError("UnAuthenticated, please login!", 401));

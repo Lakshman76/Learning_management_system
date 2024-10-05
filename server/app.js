@@ -27,17 +27,17 @@ app.use(cookieParser());
 
 app.use(morgan("dev"));
 
-app.use("/ping", (req, res) => {
-  res.send("pong");
-});
+// app.use("/ping", (req, res) => {
+//   res.send("pong");
+// });
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/courses", courseRoutes);
 app.use("/api/v1/payments", paymentRoutes)
 
-app.all("*", (req, res) => {
-  res.status(404).send("OOPS!! 404 page not found");
-});
+// app.all("*", (req, res) => {
+//   res.status(404).send("OOPS!! 404 page not found");
+// });
 
 app.use(errorMiddleware);
 

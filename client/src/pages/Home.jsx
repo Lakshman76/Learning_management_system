@@ -6,7 +6,7 @@ import HomeLayout from "../layouts/HomeLayout";
 const Home = () => {
   return (
     <HomeLayout>
-      <div className="md:py-10 py-7 mb-10 text-white flex md:flex-row flex-col-reverse items-center justify-center md:gap-10 gap-7 md:px-16 px-6 min-h-[90vh]">
+      <div className="md:py-10 py-7 mb-10 text-white flex md:flex-row flex-col-reverse items-center justify-center md:gap-10 gap-7 md:px-16 px-6 min-h-[85.5vh]">
         <div className="md:w-1/2 w-full space-y-7">
           <h1 className="lg:text-5xl font-semibold md:text-2xl sm:text-xl">
             Find out best{" "}
