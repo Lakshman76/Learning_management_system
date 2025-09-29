@@ -7,6 +7,7 @@ import CourseDescription from "./pages/courses/CourseDescription";
 import CourseList from "./pages/courses/CourseList";
 import CreateCourse from "./pages/courses/CreateCourse";
 import AddLecture from "./pages/Dashboard/AddLecture";
+import AdminDashboard from "./pages/Dashboard/AdminDashboard";
 import DisplayLecture from "./pages/Dashboard/DisplayLecture";
 import Denied from "./pages/Denied";
 import ForgetPassword from "./pages/ForgetPassword";
@@ -43,6 +44,7 @@ const App = () => {
       </Route>
 
       <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/edit-profile" element={<EditProfile />} />
         <Route path="/change-password" element={<ChangePassword />} />
